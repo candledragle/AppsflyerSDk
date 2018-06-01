@@ -84,4 +84,10 @@
         app:layout_constraintTop_toTopOf="@+id/textView3"
         app:layout_constraintVertical_bias="0.775" />
 
+    <Button
+        android:text="验证参数"
+        android:onClick="validate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 </android.support.constraint.ConstraintLayout>

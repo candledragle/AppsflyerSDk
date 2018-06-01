@@ -25,5 +25,6 @@ dependencies {
     implementation 'com.android.support:design:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
 //        implementation project(':af-appsflyer-sdk-4.8.10')
-    implementation project(':af-android-sdk-beta-4.9.0-rc10')
+    implementation project(':af-android-sdk-4.8.12')
+    implementation 'com.android.installreferrer:installreferrer:1.0'
 }

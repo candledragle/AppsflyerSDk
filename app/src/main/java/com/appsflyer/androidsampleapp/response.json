@@ -1,0 +1,56 @@
+{
+  "device": "OnePlus2",   //ok
+  "firstLaunchDate": "2018-05-29_111154+0000",  // ok
+  "installDate": "2018-05-29_110549+0000",      //ok
+  "sdk": "25",    //ok
+  "carrier": "CHN-UNICOM",        //ok
+  "date1": "2018-05-29_110549+0000",          //ok
+  "cksm_v1": "530fe3429c844b79cf05c0922723af6952",
+  "tokenRefreshConfigured": false,
+  "af_preinstalled": "false",
+  "advertiserIdEnabled": "true",
+  "iaecounter": "7",
+  "appsflyerKey": "WpSoFapu6Pwg8Z5kcJrN2b",
+  "lang_code": "zh",
+  "registeredUninstall": false,
+  "installer_package": "com.android.vending",
+  "app_version_name": "1.0",
+  "lang": "中文",
+  "gaidError": "-1: ClassNotFoundException",
+  "eventName": "af_purchase",
+  "advertiserId": "2b4795c9-cbc9-45d1-bf86-21bd9778ea7e",
+  "isGaidWithGps": "false",
+  "deviceData": {
+    "dim": {
+      "x_px": "1080",
+      "y_px": "1920",
+      "size": "2",
+      "xdp": "391.885",
+      "d_dpi": "384",
+      "ydp": "384.0"
+    },
+    "build_display_id": "OnePlus2-eng 7.1.1 NMF26Q 3d61538927 test-keys",
+    "arch": "",
+    "cpu_abi": "arm64-v8a",
+    "cpu_abi2": ""
+  },
+  "af_v2": "e488fbb163b442dfd04b27946ad855f33cb94e63",
+  "deviceType": "user",
+  "af_v": "2694d02001486064b3603172e5fb5d6f5437fbd7",
+  "app_version_code": "1",
+  "eventValue": "{\"af_content_type\":\"category_a\",\"af_content_id\":\"1234567\",\"af_revenue\":200,\"af_currency\":\"USD\"}",
+  "af_events_api": "1",
+  "network": "WIFI", //ok
+  "platformextension": "android_native",
+  "operator": "",   //ok
+  "country": "CN",
+  "date2": "2018-05-29_110549+0000",        //date2
+  "brand": "OnePlus",
+  "prev_event": "{\"prev_event_timestamp\":\"1527644830934\",\"prev_event_value\":\"{\\\"af_content_type\\\":\\\"category_a\\\",\\\"af_content_id\\\":\\\"1234567\\\",\\\"af_revenue\\\":200,\\\"af_currency\\\":\\\"USD\\\"}\",\"prev_event_name\":\"af_purchase\"}",
+  "af_timestamp": "1527645202520",
+  "uid": "1527592310606-7248516538783010990",
+  "isFirstCall": "false",
+  "counter": "2",
+  "model": "ONE A2001",
+  "product": "OnePlus2"     //ok
+}

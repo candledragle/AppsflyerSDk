@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AppsflyerSdk.iml" filepath="$PROJECT_DIR$/AppsflyerSdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TestLib/TestLib.iml" filepath="$PROJECT_DIR$/TestLib/TestLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/af-android-sdk-4.8.12/af-android-sdk-4.8.12.iml" filepath="$PROJECT_DIR$/af-android-sdk-4.8.12/af-android-sdk-4.8.12.iml" />
+      <module fileurl="file://$PROJECT_DIR$/af-android-sdk-beta-4.9.0-rc10/af-android-sdk-beta-4.9.0-rc10.iml" filepath="$PROJECT_DIR$/af-android-sdk-beta-4.9.0-rc10/af-android-sdk-beta-4.9.0-rc10.iml" />
+      <module fileurl="file://$PROJECT_DIR$/af-appsflyer-sdk-4.8.10/af-appsflyer-sdk-4.8.10.iml" filepath="$PROJECT_DIR$/af-appsflyer-sdk-4.8.10/af-appsflyer-sdk-4.8.10.iml" />
+      <module fileurl="file://$PROJECT_DIR$/af-appsflyer-sdk-4.8.9/af-appsflyer-sdk-4.8.9.iml" filepath="$PROJECT_DIR$/af-appsflyer-sdk-4.8.9/af-appsflyer-sdk-4.8.9.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+    </modules>
+  </component>
+</project>
