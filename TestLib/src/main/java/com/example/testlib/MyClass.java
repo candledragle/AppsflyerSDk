@@ -19,6 +19,7 @@ public class MyClass {
 
     }
 
+
     //方法二
     private static String test(String cachePath) {
         // $FF: Couldn't be decompiled
