@@ -33,6 +33,13 @@ public class AFApplication extends Application {
     @Override
     public void onCreate(){
         super.onCreate();
+
+        //校验dex文件是否被串改否则不能启动
+        if(!VerifyUtils.verifyDex(this)){
+            android.os.Process.killProcess(android.os.Process.myPid());
+            return;
+        }
+
         Log.d(AFApplication.class.getName(), "onCreate: ---");
 
         /**  Set Up Conversion Listener to get attribution data **/

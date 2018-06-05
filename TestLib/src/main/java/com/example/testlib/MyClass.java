@@ -1,13 +1,19 @@
 package com.example.testlib;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 public class MyClass {
 
     static int a = 100;
 
     public static void main(String args[]) {
+        
+        int a = 1;
 
         System.out.println(Boolean.valueOf("0"));
 
@@ -16,7 +22,31 @@ public class MyClass {
 
         String test = test(cachePath);
         System.out.println(test);
+        long aLong = Long.parseLong("f6544e4a", 16);
+        System.out.println(aLong);
 
+        String path = "/Users/sym/Documents/altamob/smali/smailtest/app/build/outputs/apk/debug/app-debug.apk";
+
+        File apkFile = new File(path);
+        String dexCrc = getDexCrc(apkFile);
+        System.out.println("dexCrc = "+dexCrc);
+
+    }
+
+    //获取指定apk文件里面的dex文件的crc值
+    public static String getDexCrc(File file) {
+
+        try {
+            ZipFile apkFile = new ZipFile(file);
+            ZipEntry dexEntry = apkFile.getEntry("classes.dex");
+            long crc = dexEntry.getCrc();
+            return String.valueOf(crc);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 
@@ -24,12 +54,12 @@ public class MyClass {
     private static String test(String cachePath) {
         // $FF: Couldn't be decompiled
 
-        String ret =null;
+        String ret = null;
         int v1_0x6 = 0x6;
         char v3_0xbc68 = 0xbc68;
         int v4_0xba = 0xba;
         String intern = ˋ(v1_0x6, v3_0xbc68, v4_0xba).intern();
-        String input =cachePath.replace(intern,"");
+        String input = cachePath.replace(intern, "");
 
         /*System.out.println(v1_0x6);
         System.out.println(v3_0xbc68);
@@ -46,7 +76,7 @@ public class MyClass {
         int pV3 = 0x1;
         Matcher matcher = Pattern.compile(regex).matcher(input);
 
-        if(matcher.find()){
+        if (matcher.find()) {
             ret = matcher.group(pV3);
         }
 
@@ -55,7 +85,33 @@ public class MyClass {
 
     private static int filed_i_01 = 0;
     private static int field_01 = 1;
-    private static char[] field_arr_01 = new char[]{'닁', '\ue623', 'ᬞ', '䰕', '\ue17b', 'ᩨ', '佊', '\ue0f5', 'ᖼ', '亐', '\ue38e', 'ᓪ', '䧌', '\ue2c1', 'ᘹ', '䬭', 'ﰉ', 'ᄳ', '䩞', 'ｒ', '၈', '䖴', 'ﺎ', 'ᎃ', '䓷', '匿', 'ዋ', '䘒', 'שּׂ', 'Ⱇ', '䄇', '充', '⽥', '䁟', '1', '0', 'y', '咔', 'ꦣ', 'ﺾ', '厙', '꣬', 'ﷃ', '剖', '꜌', 'ﰱ', '儝', 'ꙧ', 'ﭔ', '偤', '꒛', '戀', '亣', 'ꏧ', '빋', '\ueaa5', 'ទ', '䂋', '\uedfc', '᛭', '䎗', '\uec67', '\u1978', '䈘', '\uef5e', 'ᠵ', '䕔', '\uee42', '\u1ae6', '䟹', '\uf0cd', '\u1df2', '䚷', '\uf3db', '\u1c99', '䤽', '\uf243', 'ὒ', '䡵', '\uf535', 'Ḋ', '䪰', '\uf7f7', '\u20c0', '䷞', '\uf6ab', '뭢', '\uef80', 'ኽ', '䖶', '\ue8d8', 'Ꮛ', '䛩', '\ue956', 'ᰄ', '䜥', '\uea6f', 'ᵮ', '䁾', '\ueb7e', 'ᾁ', '䊅', '\uf5a1', 'ᣇ', '䏤', '\uf6f5', '᧩', '䰓', '\uf73a', 'ᨭ', '䵉', '㣍', '氯', '鄒', '옙', '歷', '遤', '앆', '櫹', '龬', '쒘', '榜', '黧', '쏇', '棄', '鰨', '섪', '癒', '魂', '쁣', '畕', '驛', '쾲', '璀', 'ሇ', '䛥', '믘', '\uecd3', '䆽', '몮', '\uef8c', '䀳', '땡', '\uee40', '䌊', '됈', '\ue909', '䈖', '뛾', '\uebe6', '峢', '놺', '\ueabf', '徚', 'a', '咃', 'ꦾ', 'ﺵ', '叛', '\ua8c8', '\ufdea', '剕', '꜆', 'ﰰ', '儶', 'ꘁ', 'שּ', '偻', '꒟', '.', '\\', '哃', '\ueb41', '뾧', '䊇', 'ᖍ', '뢱', '䏣', 'ᛊ', '륾', '䰷', 'ᜓ', '먙', '䵠', 'ၞ', '뭐', '뱇', '\ue8e6', 'ᗓ', '䋌', '\uefb4', 'ᒬ', '䘇', 'ዮ', '\uefdc', '뢲', 'ᗮ', '\ueea2', '뮏', 'ᑼ', '\ue16b', '멕', 'C', '咅', 'ꦿ', 'ﺤ', '叟', '꣒', 'ﷻ', '刖', 'ꜭ', 'ﰭ', '儡', 'Ꙋ', 'ﭬ', '偽', '꒟', '歷', '亾', '\uefc8', '묂', '䘽', 'ᄥ', '뱟', '䝋', 'ሠ', '북', '䢉', '\u13fb', '뺫', '䧄', 'ᓦ', '뾧', '䬛', 'ᘌ', 'ꄽ', '䱛', 'ᝁ', 'ꈹ', '䵺', 'ᢞ', 'ꎤ', '亭', 'ᦖ', 'ꓜ', '俵', 'ᬅ', 'ꘊ', '煷', 'ᰭ', 'ꝅ', '牍', 'ᵦ', 'ꢄ', '玝', 'ẳ', 'ꦠ', '瓎', 'ᾯ', 'ꪦ', 'g', '咈', 'ꦮ', 'ﺎ', '叚', '꣒', 'ﷺ', '刚', '꜄', 'ﰹ', '儧', 'ꙋ', 'ﭝ', '偹', 'ꒆ', '憐', '亹', 'ꏞ', '\uf8cb', '䷣', 'ꋭ', '\uf71e', '䰰', 'ꄸ', 'C', '咅', 'ꦿ', 'ﺤ', '叟', '꣒', 'ﷻ', '刖', 'Ꜻ', 'ﰰ', '儤', 'ꙃ', 'ﭹ', '偪', 'ꒂ', '簾', '亨', 'ꏞ', '\uf8cf', '䷧', 'ꋰ', '\uf718', '䰱', 'ꄥ', '戹', '㛳', '쯌', '鳔', 'ㆮ', '쪺', '\u9fd1', 'ね', '앹', '鹜', '㍒', '쐻', '餆', '㉖', '웻', '鯹', 'ⳉ', '솮', '骰', '⾋', '삏', '镫', '\u2e45', '쌔', '鐪', '⤿', '숙', '雨', '\u2bfc', 'ﳂ', '醙', '⪻', 'ﾶ', '邆', '╭', '︸', '鍎', '⑆', '爐', '鈁', '✇', 'ﯾ', '賴', '⇟', '節', '迬', '\u20c9'};
+    private static char[] field_arr_01 =
+            new char[]{'닁', '\ue623', 'ᬞ', '䰕', '\ue17b', 'ᩨ', '佊', '\ue0f5', 'ᖼ', '亐', '\ue38e',
+                    'ᓪ', '䧌', '\ue2c1', 'ᘹ', '䬭', 'ﰉ', 'ᄳ', '䩞', 'ｒ', '၈', '䖴', 'ﺎ', 'ᎃ', '䓷', '匿',
+                    'ዋ', '䘒', 'שּׂ', 'Ⱇ', '䄇', '充', '⽥', '䁟', '1', '0', 'y', '咔', 'ꦣ', 'ﺾ', '厙', '꣬',
+                    'ﷃ', '剖', '꜌', 'ﰱ', '儝', 'ꙧ', 'ﭔ', '偤', '꒛', '戀', '亣', 'ꏧ', '빋', '\ueaa5', 'ទ',
+                    '䂋', '\uedfc', '᛭', '䎗', '\uec67', '\u1978', '䈘', '\uef5e', 'ᠵ', '䕔', '\uee42',
+                    '\u1ae6', '䟹', '\uf0cd', '\u1df2', '䚷', '\uf3db', '\u1c99', '䤽', '\uf243', 'ὒ',
+                    '䡵', '\uf535', 'Ḋ', '䪰', '\uf7f7', '\u20c0', '䷞', '\uf6ab', '뭢', '\uef80', 'ኽ',
+                    '䖶', '\ue8d8', 'Ꮛ', '䛩', '\ue956', 'ᰄ', '䜥', '\uea6f', 'ᵮ', '䁾', '\ueb7e', 'ᾁ',
+                    '䊅', '\uf5a1', 'ᣇ', '䏤', '\uf6f5', '᧩', '䰓', '\uf73a', 'ᨭ', '䵉', '㣍', '氯', '鄒',
+                    '옙', '歷', '遤', '앆', '櫹', '龬', '쒘', '榜', '黧', '쏇', '棄', '鰨', '섪', '癒', '魂', '쁣',
+                    '畕', '驛', '쾲', '璀', 'ሇ', '䛥', '믘', '\uecd3', '䆽', '몮', '\uef8c', '䀳', '땡',
+                    '\uee40', '䌊', '됈', '\ue909', '䈖', '뛾', '\uebe6', '峢', '놺', '\ueabf', '徚', 'a',
+                    '咃', 'ꦾ', 'ﺵ', '叛', '\ua8c8', '\ufdea', '剕', '꜆', 'ﰰ', '儶', 'ꘁ', 'שּ', '偻', '꒟',
+                    '.', '\\', '哃', '\ueb41', '뾧', '䊇', 'ᖍ', '뢱', '䏣', 'ᛊ', '륾', '䰷', 'ᜓ', '먙', '䵠',
+                    'ၞ', '뭐', '뱇', '\ue8e6', 'ᗓ', '䋌', '\uefb4', 'ᒬ', '䘇', 'ዮ', '\uefdc', '뢲', 'ᗮ',
+                    '\ueea2', '뮏', 'ᑼ', '\ue16b', '멕', 'C', '咅', 'ꦿ', 'ﺤ', '叟', '꣒', 'ﷻ', '刖', 'ꜭ',
+                    'ﰭ', '儡', 'Ꙋ', 'ﭬ', '偽', '꒟', '歷', '亾', '\uefc8', '묂', '䘽', 'ᄥ', '뱟', '䝋', 'ሠ',
+                    '북', '䢉', '\u13fb', '뺫', '䧄', 'ᓦ', '뾧', '䬛', 'ᘌ', 'ꄽ', '䱛', 'ᝁ', 'ꈹ', '䵺', 'ᢞ',
+                    'ꎤ', '亭', 'ᦖ', 'ꓜ', '俵', 'ᬅ', 'ꘊ', '煷', 'ᰭ', 'ꝅ', '牍', 'ᵦ', 'ꢄ', '玝', 'ẳ', 'ꦠ',
+                    '瓎', 'ᾯ', 'ꪦ', 'g', '咈', 'ꦮ', 'ﺎ', '叚', '꣒', 'ﷺ', '刚', '꜄', 'ﰹ', '儧', 'ꙋ', 'ﭝ',
+                    '偹', 'ꒆ', '憐', '亹', 'ꏞ', '\uf8cb', '䷣', 'ꋭ', '\uf71e', '䰰', 'ꄸ', 'C', '咅', 'ꦿ',
+                    'ﺤ', '叟', '꣒', 'ﷻ', '刖', 'Ꜻ', 'ﰰ', '儤', 'ꙃ', 'ﭹ', '偪', 'ꒂ', '簾', '亨', 'ꏞ',
+                    '\uf8cf', '䷧', 'ꋰ', '\uf718', '䰱', 'ꄥ', '戹', '㛳', '쯌', '鳔', 'ㆮ', '쪺', '\u9fd1',
+                    'ね', '앹', '鹜', '㍒', '쐻', '餆', '㉖', '웻', '鯹', 'ⳉ', '솮', '骰', '⾋', '삏', '镫',
+                    '\u2e45', '쌔', '鐪', '⤿', '숙', '雨', '\u2bfc', 'ﳂ', '醙', '⪻', 'ﾶ', '邆', '╭', '︸',
+                    '鍎', '⑆', '爐', '鈁', '✇', 'ﯾ', '賴', '⇟', '節', '迬', '\u20c9'};
     private static long filed_l_01 = -285441353350097683L;
 
 
@@ -81,7 +137,8 @@ public class MyClass {
         while (true) {
             switch (var4 < var0 ? 40 : 96) {
                 case 40:
-                    var3[var4] = (char) ((int) ((long) field_arr_01[var2 + var4] ^ (long) var4 * filed_l_01 ^ (long) var1));
+                    var3[var4] = (char) ((int) ((long) field_arr_01[var2 + var4]
+                            ^ (long) var4 * filed_l_01 ^ (long) var1));
                     ++var4;
                     var10000 = field_01 + 13;
                     filed_i_01 = (field_01 + 13) % 128;
