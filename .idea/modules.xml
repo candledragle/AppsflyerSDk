@@ -10,6 +10,7 @@
       <module fileurl="file://$PROJECT_DIR$/af-appsflyer-sdk-4.8.9/af-appsflyer-sdk-4.8.9.iml" filepath="$PROJECT_DIR$/af-appsflyer-sdk-4.8.9/af-appsflyer-sdk-4.8.9.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/smailtest.iml" filepath="$PROJECT_DIR$/smailtest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yahfa/yahfa.iml" filepath="$PROJECT_DIR$/yahfa/yahfa.iml" />
     </modules>
   </component>
 </project>

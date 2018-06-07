@@ -12,6 +12,8 @@ public class MyClass {
     static int a = 100;
 
     public static void main(String args[]) {
+
+        System.out.println(String.valueOf((char) 59));
         
         int a = 1;
 
