@@ -14,6 +14,10 @@ public class MyClass {
     public static void main(String args[]) {
         
         int a = 1;
+        boolean flag = false;
+        if(flag){
+
+        }
 
         System.out.println(Boolean.valueOf("0"));
 
