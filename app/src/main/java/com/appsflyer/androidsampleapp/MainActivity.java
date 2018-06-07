@@ -2,6 +2,7 @@ package com.appsflyer.androidsampleapp;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -35,6 +36,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
+import lab.galaxy.yahfa.HookMain;
+
 
 public class MainActivity extends Activity {
 
@@ -59,6 +62,30 @@ public class MainActivity extends Activity {
                 eventValue.put(AFInAppEventParameterName.CURRENCY, "USD");
                 AppsFlyerLib.getInstance().trackEvent(getApplicationContext(),
                         AFInAppEventType.PURCHASE, eventValue);
+
+               // Test.sayHello("test say hello world!");
+
+                try {
+                    Class<?> clazz = Class.forName("com.appsflyer.e");
+
+                    Method[] methods = clazz.getDeclaredMethods();
+                    for(Method method:methods){
+                        Log.e("SYM",method.getName());
+                        Class<?>[] parameterTypes = method.getParameterTypes();
+                        Log.e("SYM","参数类型");
+                        for(Class temp:parameterTypes){
+                            Log.e("SYM",temp.getName());
+                        }
+                        Log.e("SYM"," ======== ");
+                    }
+                    Method method = clazz.getDeclaredMethod("ˊ", Context.class,long.class);
+
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                    Log.e("SYM",e.toString());
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -182,6 +209,7 @@ public class MainActivity extends Activity {
 
     }
 
+
     private String dateFormatUTC(SimpleDateFormat dateFormat, long time) {
         dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
         return dateFormat.format(new Date(time));
@@ -211,7 +239,7 @@ public class MainActivity extends Activity {
     private void makeDir() {
         DEX_PATH = Environment.getExternalStorageDirectory().getPath() + File.separator + "dex";
         SLog.e("SYM", DEX_PATH);
-        DEX_OUT_PATH = getDir("dex",0).getAbsolutePath();
+        DEX_OUT_PATH = getDir("dex", 0).getAbsolutePath();
         File file = new File(DEX_PATH);
         SLog.e("SYM", DEX_OUT_PATH);
 

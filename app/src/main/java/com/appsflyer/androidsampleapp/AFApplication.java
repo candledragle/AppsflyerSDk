@@ -7,7 +7,10 @@ import android.util.Log;
 import com.appsflyer.AppsFlyerConversionListener;
 import com.appsflyer.AppsFlyerLib;
 
+import java.lang.reflect.Method;
 import java.util.Map;
+
+import lab.galaxy.yahfa.HookMain;
 
 
 /*********************************************************************
@@ -34,10 +37,20 @@ public class AFApplication extends Application {
     public void onCreate(){
         super.onCreate();
 
-        //校验dex文件是否被串改否则不能启动
-        if(!VerifyUtils.verifyDex(this)){
-            android.os.Process.killProcess(android.os.Process.myPid());
-            return;
+        //hook 方法获取参数内容不用在通过修改 smali文件的语法
+        try {
+            Class<?> targetClazz = Class.forName("com.appsflyer.e");
+            String methodName = "ˊ";
+            String methodSig = "(Landroid/content/Context;)Ljava/lang/String";
+            Class hookClass = Class.forName("com.appsflyer.androidsampleapp.Hook");
+
+            Method hook = hookClass.getDeclaredMethod("hookMethod",Context.class,String.class);
+            Method backup = hookClass.getDeclaredMethod("backup",Context.class,String.class);
+            HookMain.findAndBackupAndHook(targetClazz, methodName, methodSig, hook, backup);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
 
         Log.d(AFApplication.class.getName(), "onCreate: ---");
