@@ -3,7 +3,7 @@ package com.appsflyer.androidsampleapp;
 import android.app.Application;
 import android.util.Log;
 
-import com.speed.booster.kim.R;
+import com.wifiup.R;
 
 import java.io.IOException;
 import java.util.logging.Logger;

@@ -1,7 +1,25 @@
 package com.example.testlib;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
 import java.io.File;
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.security.MessageDigest;
+import java.security.SecureRandom;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Formatter;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import java.util.StringTokenizer;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
@@ -10,9 +28,90 @@ import java.util.zip.ZipFile;
 public class MyClass {
 
     static int a = 100;
+    private static AtomicBoolean init = new AtomicBoolean(true);
 
     public static void main(String args[]) {
-        
+
+
+
+        String af_v = get_af_v("WpSoFapu6Pwg8Z5kcJrN2b","1529466587435-5385751131443429006","1529466587435");
+        System.out.println(af_v);
+
+        String af_v21 = get_af_v2();
+        System.out.println(af_v21);
+
+
+        /*Map badMap = (Map) JSON.parse(Json.Bad);
+        Map rightMap = (Map) JSON.parse(Json.Right);
+
+        Set badKeySet = badMap.keySet();
+
+        Set rightKeySet = rightMap.keySet();
+
+        Iterator badIterator = badKeySet.iterator();
+
+
+        A:
+        while (badIterator.hasNext()) {
+
+            String badKey = (String) badIterator.next();
+            Iterator rightIterator = rightKeySet.iterator();
+
+            while (rightIterator.hasNext()) {
+                if (badKey.equals(rightIterator.next())) {
+                    continue A;
+                }
+            }
+            System.out.println(badKey + "   is error");
+        }*/
+
+
+        try {
+
+            URL url = new URL("http://www.baidu.com");
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            String simpleName = urlConnection.getClass().getSimpleName();
+            System.out.println(simpleName);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String replace = "abcc".replace("a", "c");
+        System.out.println(replace);
+
+        System.out.println("android.telephony.TelephonyManager".length());
+
+        System.out.println((char) '\ue623');
+
+        HashMap<Object, Object> hashMap = new HashMap<>();
+        hashMap.put("aa", 1);
+        hashMap.put("b", null);
+        hashMap.put("cc", 3);
+
+        System.out.println(hashMap.toString());
+
+//3abdfdb12e3d8dd838c176955cbca3f84564a5ce
+        String af_v2 = get_af_v2();
+        System.out.println(af_v2);
+        //af_timestamp
+        long var11 = (new Date()).getTime();
+        String format = "yyyy-MM-dd_HHmmssZ";
+        SimpleDateFormat var47 = new SimpleDateFormat(format, Locale.US);
+
+        System.out.println(var47.format(var11));
+
+
+        long currentTimeMillis = System.currentTimeMillis();
+        String ret = (new StringBuilder()).append(currentTimeMillis).append("-").append(Math.abs((new SecureRandom()).nextLong())).toString();
+
+        System.out.println(ret);
+
+        System.out.println(init.compareAndSet(true, false));
+
+        /*System.out.println(String.valueOf((char) 59));
+
         int a = 1;
         boolean flag = false;
         if(flag){
@@ -33,8 +132,101 @@ public class MyClass {
 
         File apkFile = new File(path);
         String dexCrc = getDexCrc(apkFile);
-        System.out.println("dexCrc = "+dexCrc);
+        System.out.println("dexCrc = "+dexCrc);*/
 
+    }
+
+    String format_str = "yyyy-MM-dd_HHmmssZ";
+    SimpleDateFormat format = new SimpleDateFormat(format_str, Locale.US);
+    String ADVERTISER_ID = "02b3dbb7-9fe1-44c3-bc3a-6b65c68ef704";
+
+    String REFERRER = "af_tranid%3DMHoJkcIRElf9Or6sHgJ88A%26c%3D123%26af_siteid%3Dwerr%26pid%3D124%26af_click_lookback%3D1d%26clickid%3D2069849869957480259%26android_id%3Dc05cb39adca5b091%26advertising_id%3D02b3dbb7-9fe1-44c3-bc3a-6b65c68ef704%26imei%3D869897036845351";
+
+
+    public static String get_af_v(String appsflyerKey,String uid,String af_timestamp){
+        String var64 = appsflyerKey;
+        String var68 = uid;
+        String var65 = af_timestamp;
+        String temp = (new StringBuilder()).append(var64.substring(0, 7)).append(var68.substring(0, 7)).append(var65.substring(var65.length() - 7)).toString();
+        String ret = sha_1(temp);
+        return ret;
+    }
+
+    public static String get_af_v2() {
+
+        //appsflyerKey
+        String appsflyerKey = "WpSoFapu6Pwg8Z5kcJrN2b";
+
+        //af_timestamp 当前时间
+        long var11 = (new Date()).getTime();
+        // String af_timestamp = Long.toString(var11);
+        String af_timestamp = "1529462248388";
+
+        //uid
+        //String uid = getDevice_id();
+        String uid = "1529462248389-2172214629982241824";
+
+        //installDate
+        //String installDate = get_installDate(context);
+        String installDate = "2018-06-18_040046+0000";
+
+
+        //counter
+        // TODO: 6/13/18  有待进一步确认counter的具体意义 sp appsFlyerCount值
+        String counter = "40";
+
+        //iaecounter
+        // TODO: 6/13/18 记录数字  sp appsFlyerInAppEventCount值
+        String iaecounter = "0";
+
+        String str = new StringBuilder().append(appsflyerKey).append(af_timestamp).append(uid).append(installDate).append(counter).append(iaecounter).toString();
+
+        return sha_1(md5(str));
+
+    }
+
+    public static String md5(String str) {
+        String var1 = null;
+
+        try {
+            MessageDigest var2;
+            (var2 = MessageDigest.getInstance("MD5")).reset();
+            var2.update(str.getBytes("UTF-8"));
+            var1 = format(var2.digest());
+        } catch (Exception var3) {
+            //AFLogger.afErrorLog((new StringBuilder("Error turning ")).append(str.substring(0, 6)).append(".. to MD5").toString(), var3);
+        }
+
+        return var1;
+    }
+
+    public static String sha_1(String var0) {
+        String var1 = null;
+
+        try {
+            MessageDigest var2;
+            (var2 = MessageDigest.getInstance("SHA-1")).reset();
+            var2.update(var0.getBytes("UTF-8"));
+            var1 = format(var2.digest());
+        } catch (Exception var3) {
+            //AFLogger.afErrorLog((new StringBuilder("Error turning ")).append(var0.substring(0, 6)).append(".. to SHA1").toString(), var3);
+        }
+
+        return var1;
+    }
+
+    private static String format(byte[] var0) {
+        Formatter var1 = new Formatter();
+        int var2 = var0.length;
+
+        for (int var3 = 0; var3 < var2; ++var3) {
+            byte var4 = var0[var3];
+            var1.format("%02x", var4);
+        }
+
+        String var5 = var1.toString();
+        var1.close();
+        return var5;
     }
 
     //获取指定apk文件里面的dex文件的crc值

@@ -7,10 +7,10 @@
   "date1": "2018-05-29_110549+0000",          //ok
   "cksm_v1": "530fe3429c844b79cf05c0922723af6952",
   "tokenRefreshConfigured": false,
-  "af_preinstalled": "false",
+  "af_preinstalled": "false",         //是否是预装
   "advertiserIdEnabled": "true",
   "iaecounter": "7",
-  "appsflyerKey": "WpSoFapu6Pwg8Z5kcJrN2b",
+  "appsflyerKey": "WpSoFapu6Pwg8Z5kcJrN2b",  //ok
   "lang_code": "zh",
   "registeredUninstall": false,
   "installer_package": "com.android.vending",

@@ -8,12 +8,14 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/FileUtilLib" />
             <option value="$PROJECT_DIR$/TestLib" />
             <option value="$PROJECT_DIR$/af-android-sdk-4.8.12" />
             <option value="$PROJECT_DIR$/af-android-sdk-beta-4.9.0-rc10" />
             <option value="$PROJECT_DIR$/af-appsflyer-sdk-4.8.10" />
             <option value="$PROJECT_DIR$/af-appsflyer-sdk-4.8.9" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/yahfa" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

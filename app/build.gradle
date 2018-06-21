@@ -3,12 +3,18 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.speed.booster.kim"
+        //applicationId "com.speed.booster.kim"
+        applicationId "com.wifiup"
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
 //        multiDexEnabled false
+        /*externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++14"
+            }
+        }*/
     }
     buildTypes {
         release {
@@ -16,15 +22,28 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+  /*  externalNativeBuild {
+        cmake {
+            path 'CMakeLists.txt'
+        }
+    }*/
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 dependencies {
-//    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
 //    compile 'com.android.support:multidex:1.0.3'
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support:design:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
 //        implementation project(':af-appsflyer-sdk-4.8.10')
     implementation project(':af-android-sdk-4.8.12')
+    implementation project(':yahfa')
     implementation 'com.android.installreferrer:installreferrer:1.0'
 }

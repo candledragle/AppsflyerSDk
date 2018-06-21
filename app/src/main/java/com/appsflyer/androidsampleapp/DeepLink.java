@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.appsflyer.AppsFlyerConversionListener;
 import com.appsflyer.AppsFlyerLib;
-import com.speed.booster.kim.R;
+import com.wifiup.R;
 
 import java.util.Map;
 

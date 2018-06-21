@@ -1,0 +1,40 @@
+//点击归因
+https://app.appsflyer.com/com.wifiup?c={campaign_name}&af_siteid={affiliate_id}&pid=alchemy_int&af_click_lookback=1d&clickid={transaction_id}&android_id={aid}&advertising_id={gaid}&imei={imei}&idfa={idfa}
+https://app.appsflyer.com/com.wifiup?c=123&af_siteid=werr&pid=124&af_click_lookback=1d&clickid=2069849869957480259&android_id=c05cb39adca5b091&advertising_id=02b3dbb7-9fe1-44c3-bc3a-6b65c68ef704&imei=869897036845351
+
+c :  子渠道（随便填写）
+
+af_siteid: 随便填
+
+pid:   固定值
+
+af_click_lookback: 非必须
+
+clickid:  随机数
+
+android_id:  手机的android_id
+
+advertising_id:  google play 提供每次可以重置 (Setting ——> Google ——> Ads ——> Your adverting ID)
+
+imei:  (手机拨号页面 *#06# 就可以查看到)
+
+idfa: ios使用
+
+注意：UA值,模拟的时候在手机浏览器或者自己写HttpUrl请求
+
+
+
+
+
+//click点击模拟
+http://52.8.129.238:50002/UrlValidatorServer/index.html
+
+//one plus referrer
+af_tranid%3D2xG7lMCQ1LUvvvV6yfw0fw%26c%3D123%26af_siteid%3Dwerr%26pid%3D124%26af_click_lookback%3D1d%26clickid%3D2069849869957480289%26android_id%3Dc05cb39adca5b092%26advertising_id%3D02b3dbb7-9fe1-44c3-bc3a-6b65c68ef705%26imei%3D869897036845353
+
+//adb发送广播
+adb shell am broadcast -a <action> --es referrer "<referrer>
+
+例子：
+adb shell am broadcast -a com.android.vending.INSTALL_REFERRER --es referrer "af_tranid%3D2xG7lMCQ1LUvvvV6yfw0fw%26c%3D123%26af_siteid%3Dwerr%26pid%3D124%26af_click_lookback%3D1d%26clickid%3D2069849869957480289%26android_id%3Dc05cb39adca5b092%26advertising_id%3D02b3dbb7-9fe1-44c3-bc3a-6b65c68ef705%26imei%3D869897036845353
+"

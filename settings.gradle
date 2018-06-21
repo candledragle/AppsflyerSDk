@@ -1,1 +1,1 @@
-include ':app', ':af-appsflyer-sdk-4.8.9', ':af-appsflyer-sdk-4.8.10', ':af-android-sdk-beta-4.9.0-rc10', ':af-android-sdk-4.8.12', ':TestLib'
+include ':app', ':af-appsflyer-sdk-4.8.9', ':af-appsflyer-sdk-4.8.10', ':af-android-sdk-beta-4.9.0-rc10', ':af-android-sdk-4.8.12', ':TestLib', ':yahfa', ':FileUtilLib'

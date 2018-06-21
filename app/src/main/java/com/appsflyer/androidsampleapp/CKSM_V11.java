@@ -1,6 +1,7 @@
 package com.appsflyer.androidsampleapp;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
 
@@ -51,7 +52,7 @@ public class CKSM_V11 {
     private static int filed_i_01 = 0;
     private static int field_01 = 1;
 
-    static String ˊ(Context var0, long var1) {
+    static String generate(Context var0, long var1) {
         int var10000 = 2 % 2;
         StringBuilder var3 = new StringBuilder();
         StringBuilder var4 = new StringBuilder();
@@ -278,9 +279,20 @@ public class CKSM_V11 {
         return ˋ(32, '븩', 54).intern();
     }
 
+    /**
+     * 2018-06-15 15:57:57.193 29168-29235/com.wifiup E/SYM: [ +++++ ]  android.telephony.TelephonyManager
+     * 2018-06-15 15:57:57.209 29168-29235/com.wifiup E/SYM: [ +++++ ]  android.os.BatteryManager
+     * 2018-06-15 15:57:57.209 29168-29235/com.wifiup E/SYM: [ +++++ ]  android.hardware.Sensor
+     * 2018-06-15 15:57:57.209 29168-29235/com.wifiup E/SYM: [ +++++ ]  android.os.AsyncTask
+     * 2018-06-15 15:57:57.209 29168-29235/com.wifiup E/SYM: [ +++++ ]  android.net.Uri
+     *
+     * @param p0
+     * @return
+     */
     // 判断指定的类是否存在
     private static boolean ˊ(String p0) {
 
+        MainActivity.SLog.e(" ****** ", p0);
         try {
             Class.forName(p0);
         } catch (ClassNotFoundException e) {
@@ -378,13 +390,30 @@ public class CKSM_V11 {
     }
 
     //todo
-    private static String ˊ(Context param0) {
+    private static String ˊ(Context context) {
         // $FF: Couldn't be decompiled
-
+        PackageManager packageManager = context.getPackageManager();
+        String packageName = context.getPackageName();
+        try {
+            PackageInfo packageInfo = packageManager.getPackageInfo(packageName, 1);
+            return packageInfo.packageName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
         return "";
     }
 
+    /**
+     * 获取到字符串
+     * @param var0
+     * @param var1
+     * @param var2
+     * @return
+     */
     private static String ˋ(int var0, char var1, int var2) {
+
+        MainActivity.SLog.e(" ******* ", var0 + " : " + var1 + " : " + var2);
+
         int var10000 = 2 % 2;
         var10000 = field_01 + 125;
         filed_i_01 = (field_01 + 125) % 128;
@@ -424,6 +453,7 @@ public class CKSM_V11 {
                     if (var10001 % 2 != 0) {
                     }
 
+                    MainActivity.SLog.e(" ****** ", var5);
                     return var5;
             }
         }

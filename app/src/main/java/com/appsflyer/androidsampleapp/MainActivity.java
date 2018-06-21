@@ -2,6 +2,7 @@ package com.appsflyer.androidsampleapp;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -22,11 +23,22 @@ import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AFInAppEventType;
 import com.appsflyer.AFLogger;
 import com.appsflyer.AppsFlyerLib;
-import com.speed.booster.kim.R;
+import com.wifiup.R;
+
+import org.json.JSONException;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.security.KeyManagementException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,12 +46,26 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
+import java.util.concurrent.Executors;
+
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManagerFactory;
+
+import lab.galaxy.yahfa.HookMain;
 
 
 public class MainActivity extends Activity {
 
 
     final Handler handler = new Handler();
+
+    private static String a(String var0, String var1) {
+        StackTraceElement var2 = (new Throwable()).getStackTrace()[2];
+        SimpleDateFormat var3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.ENGLISH);
+        return "[" + var0 + "] " + var3.format(new Date()) + " in " + var2.getFileName() + "(" + var2.getLineNumber() + ") >" + var1;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +77,29 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
 
+                //imei
+                String imei = com.appsflyer.androidsampleapp.AppsFlyerLib.getImei(getApplicationContext());
+                SLog.e("imei", imei);
+
+                //android_id
+                String android_id = com.appsflyer.androidsampleapp.AppsFlyerLib.getAndroidId(getApplicationContext());
+                SLog.e("android_id", android_id);
+
+                //advertising_id
+                Executors.newSingleThreadExecutor().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            String adid = AdvertisingIdClient.getGoogleAdId(getApplicationContext());
+                            Log.e("MainActivity", "advertising_id:  " + adid);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+                System.out.println("大家好！");
+
                 /* Track Events in real time */
                 Map<String, Object> eventValue = new HashMap<String, Object>();
                 eventValue.put(AFInAppEventParameterName.REVENUE, 200);
@@ -59,6 +108,30 @@ public class MainActivity extends Activity {
                 eventValue.put(AFInAppEventParameterName.CURRENCY, "USD");
                 AppsFlyerLib.getInstance().trackEvent(getApplicationContext(),
                         AFInAppEventType.PURCHASE, eventValue);
+
+                // Test.sayHello("test say hello world!");
+
+                try {
+                    Class<?> clazz = Class.forName("com.appsflyer.e");
+
+                    Method[] methods = clazz.getDeclaredMethods();
+                    for (Method method : methods) {
+                        Log.e("SYM", method.getName());
+                        Class<?>[] parameterTypes = method.getParameterTypes();
+                        Log.e("SYM", "参数类型");
+                        for (Class temp : parameterTypes) {
+                            Log.e("SYM", temp.getName());
+                        }
+                        Log.e("SYM", " ======== ");
+                    }
+                    Method method = clazz.getDeclaredMethod("ˊ", Context.class, long.class);
+
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                    Log.e("SYM", e.toString());
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -88,6 +161,96 @@ public class MainActivity extends Activity {
      */
 
     public void validate(View view) throws PackageManager.NameNotFoundException {
+
+        /*try {
+            InputStream stream = getAssets().open("client.cer");
+            SSLContext tls = SSLContext.getInstance("TLS");
+            KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
+            keyStore.load(null); //去掉系统默认证书
+            Certificate certificate =
+                    CertificateFactory.getInstance("X.509").generateCertificate(stream);
+            //设置自己的证书
+            keyStore.setCertificateEntry("skxy", certificate);
+            //通过信任管理器获取一个默认的算法
+            String algorithm = TrustManagerFactory.getDefaultAlgorithm();
+            //算法工厂创建
+            TrustManagerFactory instance = TrustManagerFactory.getInstance(algorithm);
+            instance.init(keyStore);
+            tls.init(null, instance.getTrustManagers(), null);
+            SSLSocketFactory socketFactory = tls.getSocketFactory();
+            HttpsURLConnection.setDefaultSSLSocketFactory(socketFactory);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (KeyStoreException e) {
+            e.printStackTrace();
+        } catch (CertificateException e) {
+            e.printStackTrace();
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
+        }*/
+
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+
+                com.appsflyer.androidsampleapp.AppsFlyerLib appsFlyerLib1 = new com.appsflyer.androidsampleapp.AppsFlyerLib();
+                try {
+                    String json = appsFlyerLib1.assembleParams(MainActivity.this.getApplicationContext());
+                    String url = "https://t.appsflyer.com/api/v4/androidevent?buildnumber=4.8.12&app_id=com.wifiup";
+                    //String url = "https://10.200.10.230:8443/Test01/helloWorld";
+                    appsFlyerLib1.post(url,json);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (PackageManager.NameNotFoundException e) {
+                    e.printStackTrace();
+                }
+                //com.appsflyer.androidsampleapp.AppsFlyerLib.test();
+            }
+        });
+
+
+
+        //1529053599654
+        //cb37a8d3ffdd22f68f813d5791ad7f5f0c
+
+        /*try {
+            Class<?> clazz = Class.forName("com.appsflyer.e");
+            Method method = clazz.getDeclaredMethod("ˊ", Context.class, long.class);
+            method.setAccessible(true);
+            String ret = (String) method.invoke(clazz,this,Long.valueOf("1529053599654"));
+            SLog.e("cksm_v1",ret);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }*/
+
+        /*String cksm_v1 = CKSM_V11.generate(getApplication(), 1529027234660L);
+        SLog.e("cksm_v1",cksm_v1);*/
+
+
+        /*Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+
+                com.appsflyer.androidsampleapp.AppsFlyerLib.test();
+            }
+        });
+*/
+
+        com.appsflyer.androidsampleapp.AppsFlyerLib appsFlyerLib = new com.appsflyer.androidsampleapp.AppsFlyerLib();
+        String af_v2 = appsFlyerLib.get_af_v2(this);
+        SLog.e("af_v2", af_v2);
+
+        File filesDir = getFilesDir();
+        SLog.e("fileDir", filesDir.getAbsolutePath());
 
         String cachePath = this.getCacheDir().getPath(); //获取缓存路径
         SLog.e(cachePath, cachePath);
@@ -178,9 +341,29 @@ public class MainActivity extends Activity {
         String app_version_name = packageInfo.versionName;
         SLog.e("app_version_name", app_version_name);
 
-        checkPermisson();
+        //af_timestamp 当前时间
+        long var11 = (new Date()).getTime();
+        String af_timestamp = Long.toString(var11);
+
+        //appsflyerKey
+        String appsflyerKey = AF_DEV_KEY;
+
+
+        //af_preinstalled  是否是预装
+
+
+        //checkPermisson();
+
+        //installer_package
+        PackageManager packageManager = getPackageManager();
+        String packageName = getPackageName();
+        String installerPackageName = packageManager.getInstallerPackageName(packageName);
+        SLog.e("installerPackageName", installerPackageName);
 
     }
+
+    private static final String AF_DEV_KEY = "WpSoFapu6Pwg8Z5kcJrN2b";
+
 
     private String dateFormatUTC(SimpleDateFormat dateFormat, long time) {
         dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -211,7 +394,7 @@ public class MainActivity extends Activity {
     private void makeDir() {
         DEX_PATH = Environment.getExternalStorageDirectory().getPath() + File.separator + "dex";
         SLog.e("SYM", DEX_PATH);
-        DEX_OUT_PATH = getDir("dex",0).getAbsolutePath();
+        DEX_OUT_PATH = getDir("dex", 0).getAbsolutePath();
         File file = new File(DEX_PATH);
         SLog.e("SYM", DEX_OUT_PATH);
 
@@ -259,14 +442,20 @@ public class MainActivity extends Activity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-            @NonNull int[] grantResults) {
+                                           @NonNull int[] grantResults) {
 
         if (REQUEST_CODE == requestCode) {
             makeDir();
+        } else if (READ_PHONE_STATE == requestCode) {
+            //imei
+            String imei = com.appsflyer.androidsampleapp.AppsFlyerLib.getImei(getApplicationContext());
+            SLog.e("imei", imei);
         }
 
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
+
+    private static final int READ_PHONE_STATE = 1011;
 
     /**
      * 检查权限
@@ -283,5 +472,23 @@ public class MainActivity extends Activity {
                 makeDir();
             }
         }
+    }
+
+    /**
+     * 检查制定的权限
+     */
+    private boolean chekPermisson(String permission, int requestCode) {
+        if (Build.VERSION.SDK_INT >= 23) {
+            ArrayList<String> permissonStrs = new ArrayList<>();
+            int open = ContextCompat.checkSelfPermission(this, permission);
+            if (open != PackageManager.PERMISSION_GRANTED) {
+                permissonStrs.add(permission);
+                requestPermissions(permissonStrs.toArray(new String[0]), requestCode);
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
     }
 }
